@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %} Books {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        {% for book in books %}
+        <div class="card" style="width: 18rem;">
+            <img src="https://miro.medium.com/v2/resize:fit:1400/1*s_BUOauMhzRZL0dBiCExww.png" class="card-img-top"
+                 alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ book.title }}</h5>
+                <p class="card-text">{{ book.description|slice:":200"}}</p>
+                <p class="card-text">{{ book.author }}</p>
+                <p class="card-text">{{ book.publishing_date }}</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}
