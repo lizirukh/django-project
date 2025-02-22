@@ -10,15 +10,19 @@ def books_list(request):
 
 def add_book(request):
 
-    if request.method == 'POST':
-        form = BooksForm(request.POST)
+    if request.user.is_authenticated and request.user.has_perm('core.add_bookslist'):
 
-        if form.is_valid():
-            book = form.save()
+        if request.method == 'POST':
+            form = BooksForm(request.POST)
 
-            return redirect('books_list')
+            if form.is_valid():
+                book = form.save()
+
+                return redirect('books_list')
+
+        else:
+            form = BooksForm()
+            return render(request, 'events/add_book.html', {'form': form})
 
     else:
-        form = BooksForm()
-
-        return render(request, 'events/add_book.html', {'form': form})
+        return HTTPResponse('You do not have permission to add books.')
