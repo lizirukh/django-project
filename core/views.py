@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from .models import BooksList
 from .forms import BooksForm
 
@@ -25,4 +25,4 @@ def add_book(request):
             return render(request, 'events/add_book.html', {'form': form})
 
     else:
-        return HTTPResponse('You do not have permission to add books.')
+        return HttpResponse('You do not have permission to add books.')
