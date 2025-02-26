@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} Book Details {% endblock %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+<div class="card text-center">
+  <div class="card-header">
+    Featured
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{ book.title }}</h5>
+    <p class="card-text">{{ book.description }}</p>
+    <a href="{% url 'books_list' %}" class="btn btn-primary">Go Back</a>
+    <a href="{% url 'delete_book' book.pk %}" class="btn btn-danger">Delete</a>
+  </div>
+  <div class="card-footer text-body-secondary">
+    {{ book.publishing_date }}
+  </div>
+  <div class="card-footer text-body-secondary">
+    {{ book.create_date }}
+  </div>
+</div>
+
+{% endblock %}
