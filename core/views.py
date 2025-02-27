@@ -1,18 +1,22 @@
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404, HttpResponseRedirect
-from .models import BooksList
+from .models import BooksList, Author
 from .forms import BooksForm
-from django.urls import reverse
+# from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 from .permissions import delete_book_permission
+from django.db.models import Q
 
-from .permissions import delete_book_permission
 
 
 def books_list(request):
 
-    query = request.GET.get('search_item')
+    query1 = request.GET.get('search_item2')
+    query2 = request.GET.get('search_item2')
 
-    if query:
-        books = BooksList.objects.filter(title__icontains=query)
+    if query1 and query2:
+        books1 = BooksList.objects.filter(title__icontains=query1)
+        books2 = BooksList.objects.filter(Q(author__first_name__icontains=query2) | Q(author__last_name__icontains=query2))
+        books = books1 & books2
     else:
         books = BooksList.objects.all()
 
@@ -42,9 +46,29 @@ def book_detail(request, pk):
 
     return render(request, 'events/book_detail.html', {'book': book})
 
+@login_required(login_url='login')
 @delete_book_permission
 def delete_book(request, pk):
-    book = BooksList.objects.get(pk=pk)
-    book.delete()
+    book = get_object_or_404(BooksList, pk=pk)
+    # book = BooksList.objects.get(pk=pk)
+    if request.method == 'POST':
+        book.delete()
 
-    return HttpResponseRedirect(reverse('books_list'))
+    return redirect('books_list')
+    # return HttpResponseRedirect(reverse('books_list'))
+
+
+def change_book(request, pk):
+    book = get_object_or_404(BooksList, pk=pk)
+
+    if request.method == 'POST':
+        form = BooksForm(request.POST, instance=book)
+
+        if form.is_valid():
+            book = form.save()
+
+            return redirect('book_detail', pk=pk)
+
+    else:
+        form = BooksForm(instance=book)
+        return render(request, 'events/update_books.html', {'form': form})

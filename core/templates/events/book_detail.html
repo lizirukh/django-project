@@ -14,7 +14,18 @@
     <h5 class="card-title">{{ book.title }}</h5>
     <p class="card-text">{{ book.description }}</p>
     <a href="{% url 'books_list' %}" class="btn btn-primary">Go Back</a>
-    <a href="{% url 'delete_book' book.pk %}" class="btn btn-danger">Delete</a>
+
+    {% if user.is_authenticated and perms.core.delete_bookslist %}
+    <a href="{% url 'change_book' book.pk %}" class='btn btn-warning'>Edit</a>
+
+    <form action="{% url 'delete_book' book.pk %}" method="post">
+      {% csrf_token %}
+      <button class="btn btn-danger">Delete</button>
+    </form>
+    {% endif %}
+
+
+
   </div>
   <div class="card-footer text-body-secondary">
     {{ book.publishing_date }}
