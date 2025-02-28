@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'middleware.simple_middleware.SimpleMiddleware',
 ]
 
 ROOT_URLCONF = 'books_app.urls'
@@ -117,7 +118,7 @@ TIME_ZONE = 'Asia/Tbilisi'
 
 USE_I18N = True
 
-USE_TZ = True
+USE_TZ = False
 
 
 # Static files (CSS, JavaScript, Images)

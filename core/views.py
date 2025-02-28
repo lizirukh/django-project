@@ -10,18 +10,26 @@ from django.db.models import Q
 
 def books_list(request):
 
-    query1 = request.GET.get('search_item2')
-    query2 = request.GET.get('search_item2')
+    title = request.GET.get('title')
+    author = request.GET.get('author')
 
-    if query1 and query2:
-        books1 = BooksList.objects.filter(title__icontains=query1)
-        books2 = BooksList.objects.filter(Q(author__first_name__icontains=query2) | Q(author__last_name__icontains=query2))
-        books = books1 & books2
+    filters = Q()
+
+    if title and author:
+        filters &= Q(title__icontains=title) & (Q(author_id__first_name__icontains=author) | Q(author_id__last_name__icontains=author))
+    elif title:
+        filters |= Q(title__icontains=title)
+    elif author:
+        filters |= Q(author_id__first_name__icontains=author) | Q(author_id__last_name__icontains=author)
+
+    if title or author:
+        books = filters
     else:
         books = BooksList.objects.all()
 
     return render(request, 'events/books_list.html', {'books': books})
 
+@login_required(login_url='login')
 def add_book(request):
 
     # if request.user.is_authenticated and request.user.has_perm('core.add_bookslist'):
