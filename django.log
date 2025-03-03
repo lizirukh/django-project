@@ -1,0 +1,85 @@
+deac[INFO 2025-02-28 21:40:24,556] views: Started Index Page Logic
+[INFO 2025-02-28 21:40:24,556] views: Filtering: Title - None, author - None
+[INFO 2025-02-28 21:43:43,015] views: Started Index Page Logic
+[INFO 2025-02-28 21:43:43,016] views: Filtering: Title - None, author - None
+[INFO 2025-02-28 21:44:12,787] views: Started Index Page Logic
+[INFO 2025-02-28 21:44:12,787] views: Filtering: Title - None, author - None
+[INFO 2025-02-28 21:44:18,060] views: Started Add Book Logic
+[INFO 2025-02-28 21:45:46,933] views: Started Index Page Logic
+[INFO 2025-02-28 21:45:46,934] views: Filtering: Title - None, author - None
+[INFO 2025-02-28 21:45:49,003] views: Started Book Detail page Logic
+[INFO 2025-03-02 19:34:28,395] views: Started Index Page Logic
+[INFO 2025-03-02 19:34:28,396] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:35:32,137] views: Started Index Page Logic
+[INFO 2025-03-02 19:35:32,137] views: Filtering: Title - phil, author - 
+[INFO 2025-03-02 19:38:07,126] views: Started Index Page Logic
+[INFO 2025-03-02 19:38:07,126] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:39:03,656] views: Started Index Page Logic
+[INFO 2025-03-02 19:39:03,656] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:39:16,931] views: Started Index Page Logic
+[INFO 2025-03-02 19:39:16,932] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:41:40,660] views: Started Index Page Logic
+[INFO 2025-03-02 19:41:40,661] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:41:42,141] views: Started Index Page Logic
+[INFO 2025-03-02 19:41:42,141] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:41:50,753] views: Started Index Page Logic
+[INFO 2025-03-02 19:41:50,753] views: Filtering: Title - kite, author - kh
+[INFO 2025-03-02 19:43:07,267] views: Started Index Page Logic
+[INFO 2025-03-02 19:43:07,267] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:43:09,631] views: Started Add Book Logic
+[INFO 2025-03-02 19:44:14,304] views: Started Add Book Logic
+[INFO 2025-03-02 19:44:14,365] views: Started Index Page Logic
+[INFO 2025-03-02 19:44:14,365] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:44:47,137] views: Started Index Page Logic
+[INFO 2025-03-02 19:44:47,138] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:46:51,068] views: Started Index Page Logic
+[INFO 2025-03-02 19:46:51,068] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:46:54,092] views: Started Book Detail page Logic
+[INFO 2025-03-02 19:46:54,139] views: Book Detail Page: Title - {title}, Author - {author}
+[INFO 2025-03-02 19:46:55,890] views: Started Delete Book Logic
+[INFO 2025-03-02 19:46:55,921] views: Book - Title - {title}, by - {author} has been deleted.
+[INFO 2025-03-02 19:46:55,971] views: Started Index Page Logic
+[INFO 2025-03-02 19:46:55,971] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:49:32,898] views: Started Index Page Logic
+[INFO 2025-03-02 19:49:32,898] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:49:35,216] views: Started Book Detail page Logic
+[INFO 2025-03-02 19:49:41,704] views: Started Book Detail page Logic
+[INFO 2025-03-02 19:50:09,561] views: Started Book Detail page Logic
+[INFO 2025-03-02 19:50:38,740] views: Started Index Page Logic
+[INFO 2025-03-02 19:50:38,740] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:50:40,593] views: Started Book Detail page Logic
+[INFO 2025-03-02 19:51:01,896] views: Started Index Page Logic
+[INFO 2025-03-02 19:51:01,896] views: Filtering: Title - None, author - None
+[INFO 2025-03-02 19:51:04,193] views: Started Book Detail page Logic
+[INFO 2025-03-02 19:51:21,226] views: Started Add Book Logic
+[INFO 2025-03-02 19:51:24,318] views: Started Index Page Logic
+[INFO 2025-03-02 19:51:24,318] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:09:26,243] views: Started Index Page Logic
+[INFO 2025-03-03 20:09:26,244] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:09:43,158] views: Started Index Page Logic
+[INFO 2025-03-03 20:09:43,158] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:10:06,678] views: Started Book Detail page Logic
+[INFO 2025-03-03 20:10:27,797] views: Started Index Page Logic
+[INFO 2025-03-03 20:10:27,797] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:10:29,163] views: Started Book Detail page Logic
+[INFO 2025-03-03 20:11:49,529] views: Started Index Page Logic
+[INFO 2025-03-03 20:11:49,529] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:11:50,938] views: Started Book Detail page Logic
+[INFO 2025-03-03 20:11:50,983] views: Book Detail Page: Title - <built-in function id>
+[INFO 2025-03-03 20:12:46,578] views: Started Index Page Logic
+[INFO 2025-03-03 20:12:46,579] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:12:57,313] views: Started Book Detail page Logic
+[INFO 2025-03-03 20:14:13,084] views: Started Book Detail page Logic
+[INFO 2025-03-03 20:14:13,152] views: Book Detail Page: - <built-in function id>
+[INFO 2025-03-03 20:14:14,818] views: Started Delete Book Logic
+[INFO 2025-03-03 20:14:14,830] views: Book - <built-in function id> has been deleted.
+[INFO 2025-03-03 20:14:14,836] views: Started Index Page Logic
+[INFO 2025-03-03 20:14:14,836] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:15:02,951] views: Started Book Detail page Logic
+[INFO 2025-03-03 20:15:03,025] views: Book Detail Page: - <built-in function id>
+[INFO 2025-03-03 20:15:05,025] views: Edit Book Logic has started.
+[INFO 2025-03-03 20:15:15,610] views: Edit Book Logic has started.
+[INFO 2025-03-03 20:15:15,695] views: Started Book Detail page Logic
+[INFO 2025-03-03 20:15:15,751] views: Book Detail Page: - <built-in function id>
+[INFO 2025-03-03 20:15:18,163] views: Started Index Page Logic
+[INFO 2025-03-03 20:15:18,164] views: Filtering: Title - None, author - None

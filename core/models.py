@@ -36,5 +36,5 @@ class BooksList(models.Model):
         db_table = 'books_list'
 
     def __str__(self):
-        return self.title
+        return self.title, self.author
 
