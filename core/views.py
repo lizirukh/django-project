@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from .permissions import delete_book_permission
 from django.db.models import Q
 import logging
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +34,14 @@ def books_list(request):
         books = BooksList.objects.all()
 
     # logger.info(f'Book Quantity: " {books.count()}')
+    paginator = Paginator(books, 4)
+    try:
+        page = request.GET.get('page')
+        books = paginator.page(page)
+    except PageNotAnInteger:
+        books = paginator.page(1)
+    except EmptyPage:
+        books = paginator.page(paginator.num_pages)
 
     return render(request, 'events/books_list.html', {'books': books})
 
