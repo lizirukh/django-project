@@ -38,3 +38,6 @@ class BooksList(models.Model):
     def __str__(self):
         return self.title, self.author
 
+class BookImage(models.Model):
+    book = models.ForeignKey(BooksList, on_delete=models.CASCADE, related_name='images')
+    image = models.ImageField(upload_to='book-images/', null=True, blank=True)

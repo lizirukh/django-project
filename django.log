@@ -83,3 +83,34 @@ deac[INFO 2025-02-28 21:40:24,556] views: Started Index Page Logic
 [INFO 2025-03-03 20:15:15,751] views: Book Detail Page: - <built-in function id>
 [INFO 2025-03-03 20:15:18,163] views: Started Index Page Logic
 [INFO 2025-03-03 20:15:18,164] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:17:03,404] views: Started Index Page Logic
+[INFO 2025-03-03 20:17:03,405] views: Filtering: Title - mal, author - chris
+[INFO 2025-03-03 20:17:06,806] views: Started Index Page Logic
+[INFO 2025-03-03 20:17:06,807] views: Filtering: Title - mal, author - chris
+[INFO 2025-03-03 20:17:12,273] views: Started Index Page Logic
+[INFO 2025-03-03 20:17:12,273] views: Filtering: Title - mal, author - chris
+[INFO 2025-03-03 20:26:00,365] views: Started Add Book Logic
+[INFO 2025-03-03 20:26:10,955] views: Started Index Page Logic
+[INFO 2025-03-03 20:26:10,955] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:42:51,245] views: Started Index Page Logic
+[INFO 2025-03-03 20:42:51,246] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:43:22,208] views: Started Book Detail page Logic
+[INFO 2025-03-03 20:43:22,275] views: Book Detail Page: - <built-in function id>
+[INFO 2025-03-03 20:43:30,166] views: Started Index Page Logic
+[INFO 2025-03-03 20:43:30,166] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:48:05,419] views: Started Index Page Logic
+[INFO 2025-03-03 20:48:05,419] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:48:05,484] views: Book Count" 5
+[INFO 2025-03-03 20:48:21,246] views: Started Index Page Logic
+[INFO 2025-03-03 20:48:21,246] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:48:21,304] views: Book Quantity: " 5
+[INFO 2025-03-03 20:54:19,135] views: Started Index Page Logic
+[ERROR 2025-03-03 20:54:19,136] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:54:19,186] views: Book Quantity: " 5
+[INFO 2025-03-03 20:54:21,842] views: Started Add Book Logic
+[INFO 2025-03-03 20:54:23,531] views: Started Index Page Logic
+[ERROR 2025-03-03 20:54:23,532] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:54:23,695] views: Book Quantity: " 5
+[INFO 2025-03-03 20:55:23,110] views: Started Index Page Logic
+[WARNING 2025-03-03 20:55:23,110] views: Filtering: Title - None, author - None
+[INFO 2025-03-03 20:55:23,155] views: Book Quantity: " 5

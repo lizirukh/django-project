@@ -8,8 +8,14 @@
     <div class="row">
         {% for book in books %}
         <div class="card" style="width: 18rem;">
-            <img src="https://miro.medium.com/v2/resize:fit:1400/1*s_BUOauMhzRZL0dBiCExww.png" class="card-img-top"
-                 alt="...">
+            {% if book.images.first %}
+                <img src="{{ book.images.first.image.url }}" class="card-img-top" alt="...">
+
+            {% else %}
+                <img src="https://miro.medium.com/v2/resize:fit:1400/1*s_BUOauMhzRZL0dBiCExww.png" class="card-img-top"
+                     alt="...">
+            {% endif %}
+
             <div class="card-body">
                 <h5 class="card-title">{{ book.title }}</h5>
                 <p class="card-text">{{ book.description|slice:":150"}}</p>

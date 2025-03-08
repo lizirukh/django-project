@@ -6,11 +6,17 @@
 
 {% block content %}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
 
     {% csrf_token %}
 
-    {{ form|crispy }}
+    {{ book_form|crispy }}
+
+    {{ image_formset.management_form }}
+
+    {% for form in image_formset %}
+        {{ form|crispy }}
+    {% endfor %}
 
      <button type="submit" class="btn btn-success">Add Book</button>
      <a href="{% url 'books_list' %}" class="btn btn-danger">Cancel</a>
