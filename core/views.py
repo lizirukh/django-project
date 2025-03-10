@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse, get_object_or_404, HttpResponseRedirect
-from .models import BooksList, Author
+from .models import BooksList, Author, BuyBook
 from .forms import BooksForm, BookImageFormSet
 # from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -7,6 +7,9 @@ from .permissions import delete_book_permission
 from django.db.models import Q
 import logging
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 logger = logging.getLogger(__name__)
 
@@ -80,6 +83,30 @@ def book_detail(request, pk):
     # logger.info(f'Book Detail Page: - {id}')
 
     return render(request, 'events/book_detail.html', {'book': book})
+
+def buy_book(request, pk):
+    book = get_object_or_404(BooksList, pk=pk)
+
+    if book.sold_out():
+        return HttpResponse('The book is out stock.')
+
+    buy_book, created = BuyBook.objects.get_or_create(book = book, user = request.user)
+
+    if created:
+        buy_book.book_count = 1
+    else:
+        buy_book.book_count += 1
+
+    buy_book.save()
+
+    book.left_in_stock -= 1
+    book.save()
+
+    send_mail('Buy Book', f'{request.user.username} has successfully bought the book - {book.title}', settings.DEFAULT_FROM_EMAIL, [request.user.email])
+    # send_mail('Buy Book', f'{request.user.username} has successfully bought the book - {book.title}.', settings.DEFAULT_FROM_EMAIL, [request.user.email])
+
+    return redirect('books_list')
+
 
 @login_required(login_url='login')
 @delete_book_permission
