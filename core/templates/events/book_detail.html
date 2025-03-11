@@ -4,36 +4,43 @@
 
 {% load crispy_forms_tags %}
 
+{% load static %}
+
 {% block content %}
 
-<div class="card text-center">
-  <div class="card-header">
-    Featured
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{ book.title }}</h5>
-    <p class="card-text">{{ book.description }}</p>
-    <a href="{% url 'books_list' %}" class="btn btn-info">Go Back</a>
+<link rel="stylesheet" href="{% static 'core/css/book_detail.css' %}">
 
-    {% if user.is_authenticated and perms.core.delete_bookslist %}
-    <a href="{% url 'change_book' book.pk %}" class='btn btn-warning'>Edit</a>
-    <a href="{% url 'buy_book' book.pk %}" class='btn btn-primary'>Buy Book</a>
-
-    <form action="{% url 'delete_book' book.pk %}" method="post">
-      {% csrf_token %}
-      <button class="btn btn-danger">Delete</button>
-    </form>
+<div class="main-container">
+    {% if book.images.first %}
+    <img src="{{ book.images.first.image.url }}" class="card-img-top" alt="...">
+    {% else %}
+    <img src="https://miro.medium.com/v2/resize:fit:1400/1*s_BUOauMhzRZL0dBiCExww.png" class="card-img-top"
+         alt="...">
     {% endif %}
+    <div class="book-information">
+        <h5 class="card-title">{{ book.title }}</h5>
+        <p class="card-text">{{ book.description }}</p>
+        <p class="card-text">{{ book.publishing_date }}</p>
+        <a href="{% url 'books_list' %}" class="btn btn-info">Go Back</a>
+
+        {% if user.is_authenticated and perms.core.delete_bookslist %}
+        <a href="{% url 'change_book' book.pk %}" class='btn btn-warning'>Edit</a>
+        <a href="{% url 'buy_book' book.pk %}" class='btn btn-primary'>Buy Book</a>
+
+        <form action="{% url 'delete_book' book.pk %}" method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger">Delete</button>
+        </form>
+        {% endif %}
 
 
-
-  </div>
-  <div class="card-footer text-body-secondary">
-    {{ book.publishing_date }}
-  </div>
-  <div class="card-footer text-body-secondary">
-    {{ book.create_date }}
-  </div>
+    </div>
+    <div class="card-footer text-body-secondary">
+        {{ book.publishing_date }}
+    </div>
+    <div class="card-footer text-body-secondary">
+        {{ book.create_date }}
+    </div>
 </div>
 
 {% endblock %}

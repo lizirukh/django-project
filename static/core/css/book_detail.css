@@ -1,0 +1,14 @@
+.main-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 50px;
+}
+
+.card-img-top {
+    width: 20%;
+    height: 400px;
+}
+
+.book-information {
+    justify-content: center;
+}

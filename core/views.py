@@ -84,6 +84,7 @@ def book_detail(request, pk):
 
     return render(request, 'events/book_detail.html', {'book': book})
 
+@login_required(login_url='login')
 def buy_book(request, pk):
     book = get_object_or_404(BooksList, pk=pk)
 

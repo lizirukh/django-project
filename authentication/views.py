@@ -1,7 +1,8 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .forms import RegistrationForm
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 
 def register_user(request):
     if request.method == 'POST':
@@ -45,3 +46,17 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return redirect('books_list')
+
+@login_required(login_url='login')
+def change_password(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(user=request.user, data=request.POST)
+        if form.is_valid():
+            form.save()
+
+            update_session_auth_hash(request, request.user)
+
+            return redirect('books_list')
+    else:
+        form = PasswordChangeForm(user=request.user)
+        return render(request, 'registration/change_password.html', {'form': form})
