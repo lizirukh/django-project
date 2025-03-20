@@ -181,3 +181,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'lizirukh@gmail.com'
 EMAIL_HOST_PASSWORD = 'rfubyoecrakzbdvw'
 DEFAULT_FROM_EMAIL = 'lizirukh@gmail.com'
+
+LOGIN_REDIRECT_URL = '/'

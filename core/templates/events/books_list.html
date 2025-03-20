@@ -22,7 +22,7 @@
                 <p class="card-text">{{ book.description|slice:":150"}}</p>
                 <p class="card-text"><b>Author:</b> {{ book.author }}</p>
                 <p class="card-text">{{ book.publishing_date }}</p>
-                <a href="{% url 'book_detail' book.pk %}" class="btn btn-primary">See Details</a>
+                <a href="{% url 'core:book_detail' book.pk %}" class="btn btn-primary">See Details</a>
             </div>
         </div>
         {% endfor %}

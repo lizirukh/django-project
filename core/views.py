@@ -10,47 +10,78 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.core.mail import send_mail
 from django.conf import settings
 
+from django.views.generic import View, ListView, CreateView
+from django.urls import reverse_lazy
+
 
 logger = logging.getLogger(__name__)
 
-def books_list(request):
+class BooksListView(ListView):
+    model = BooksList
+    template_name = 'events/books_list.html'
+    context_object_name = 'books'
+    paginate_by = 8
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+
+        title = self.request.GET.get('title')
+        author = self.request.GET.get('author')
+
+        filters = Q()
+
+        if title and author:
+            filters &= Q(title__icontains=title) & (Q(author_id__first_name__icontains=author) | Q(author_id__last_name__icontains=author))
+        elif title:
+            filters |= Q(title__icontains=title)
+        elif author:
+            filters |= Q(author_id__first_name__icontains=author) | Q(author_id__last_name__icontains=author)
+
+        if title or author:
+            books = self.model.objects.filter(filters)
+        else:
+            books = self.model.objects.all()
+
+        return books
+
+# def books_list(request):
 
     # logger.info('Started Index Page Logic')
 
-    title = request.GET.get('title')
-    author = request.GET.get('author')
+#     title = request.GET.get('title')
+#     author = request.GET.get('author')
+#
+#     # logger.warning(f'Filtering: Title - {title}, author - {author}')
+#
+#     filters = Q()
+#
+# if title and author:
+#     filters &= Q(title__icontains=title) & (Q(author_id__first_name__icontains=author) | Q(author_id__last_name__icontains=author))
+# elif title:
+#     filters |= Q(title__icontains=title)
+# elif author:
+#     filters |= Q(author_id__first_name__icontains=author) | Q(author_id__last_name__icontains=author)
+#
+    # if title or author:
+    #     books = filters
+    # else:
+    #     books = BooksList.objects.all()
+#
+#     # logger.info(f'Book Quantity: " {books.count()}')
+#     paginator = Paginator(books, 4)
+#     try:
+#         page = request.GET.get('page')
+#         books = paginator.page(page)
+#     except PageNotAnInteger:
+#         books = paginator.page(1)
+#     except EmptyPage:
+#         books = paginator.page(paginator.num_pages)
+#
+#     return render(request, 'events/books_list.html', {'books': books})
 
-    # logger.warning(f'Filtering: Title - {title}, author - {author}')
-
-    filters = Q()
-
-    if title and author:
-        filters &= Q(title__icontains=title) & (Q(author_id__first_name__icontains=author) | Q(author_id__last_name__icontains=author))
-    elif title:
-        filters |= Q(title__icontains=title)
-    elif author:
-        filters |= Q(author_id__first_name__icontains=author) | Q(author_id__last_name__icontains=author)
-
-    if title or author:
-        books = filters
-    else:
-        books = BooksList.objects.all()
-
-    # logger.info(f'Book Quantity: " {books.count()}')
-    paginator = Paginator(books, 4)
-    try:
-        page = request.GET.get('page')
-        books = paginator.page(page)
-    except PageNotAnInteger:
-        books = paginator.page(1)
-    except EmptyPage:
-        books = paginator.page(paginator.num_pages)
-
-    return render(request, 'events/books_list.html', {'books': books})
 
 @login_required(login_url='login')
 def add_book(request):
-
     # if request.user.is_authenticated and request.user.has_perm('core.add_bookslist'):
     # logger.info('Started Add Book Logic')
 
@@ -76,6 +107,7 @@ def add_book(request):
     # else:
     #     return HttpResponse('You do not have permission to add books.')
 
+
 def book_detail(request, pk):
     # logger.info('Started Book Detail page Logic')
 
@@ -84,6 +116,7 @@ def book_detail(request, pk):
 
     return render(request, 'events/book_detail.html', {'book': book})
 
+
 @login_required(login_url='login')
 def buy_book(request, pk):
     book = get_object_or_404(BooksList, pk=pk)
@@ -91,7 +124,7 @@ def buy_book(request, pk):
     if book.sold_out():
         return HttpResponse('The book is out stock.')
 
-    buy_book, created = BuyBook.objects.get_or_create(book = book, user = request.user)
+    buy_book, created = BuyBook.objects.get_or_create(book=book, user=request.user)
 
     if created:
         buy_book.book_count = 1
@@ -103,7 +136,8 @@ def buy_book(request, pk):
     book.left_in_stock -= 1
     book.save()
 
-    send_mail('Buy Book', f'{request.user.username} has successfully bought the book - {book.title}', settings.DEFAULT_FROM_EMAIL, [request.user.email])
+    send_mail('Buy Book', f'{request.user.username} has successfully bought the book - {book.title}',
+              settings.DEFAULT_FROM_EMAIL, [request.user.email])
     # send_mail('Buy Book', f'{request.user.username} has successfully bought the book - {book.title}.', settings.DEFAULT_FROM_EMAIL, [request.user.email])
 
     return redirect('books_list')

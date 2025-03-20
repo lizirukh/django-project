@@ -6,61 +6,77 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Books</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'books_list'%}">Home</a>
-        </li>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Books</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="{% url 'core:books_list'%}">Home</a>
+                </li>
 
-        {% if user.is_authenticated and perms.core.add_bookslist %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'add_book' %}">Add Book</a>
-          </li>
-        {% endif %}
+                {% if user.is_authenticated and perms.core.add_bookslist %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'core:add_book' %}">Add Book</a>
+                </li>
+                {% endif %}
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            More
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'change_password' %}">Change Password</a></li>
-            <li><a class="dropdown-item" href="{% url 'password_reset' %}">Reset Password</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-              </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                       aria-expanded="false">
+                        More
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% if user.is_authenticated %}
+                        <li><a class="dropdown-item" href="{% url 'authentication:change_password' %}">Change
+                            Password</a></li>
+                        {% endif %}
+                        <li><a class="dropdown-item" href="{% url 'authentication:password_reset' %}">Reset Password</a>
+                        </li>
+                        <!--            <li><hr class="dropdown-divider"></li>-->
+                        <li>
+                        <li class="nav-item">
+                            {% if user.is_authenticated %}
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <!--                    <a class="nav-link" href="{% url 'authentication:logout' %}">Logout</a>-->
+                        <form action="{% url 'authentication:logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit" class="nav-link">Logout</button>
+                        </form>
+
+                        {% endif %}
+                </li>
+            </ul>
             </li>
-          </ul>
-        </li>
 
-        {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a class="nav-link" aria-disabled="true">{{ user }}</a>
-          </li>
+            {% if user.is_authenticated %}
+            <li class="nav-item">
+                <a class="nav-link" aria-disabled="true">{{ user }}</a>
+            </li>
+            {% else %}
 
-        {% else %}
-
-        <li class="nav-item">
-            <a class="nav-link" href="{% url 'login' %}" >Login</a>
-          </li>
-
-        {% endif %}
-
-
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Title" aria-label="Search" name="title">
-        <input class="form-control me-2" type="search" placeholder="Author" aria-label="Search" name="author">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'authentication:login' %}">Login</a>
+            </li>
+            <div class="nav-registration">
+                <li class="nav-item">
+                    <a class="btn btn-primary" href="{% url 'authentication:registration' %}">Register</a>
+                </li>
+            </div>
+            {% endif %}
+            </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Title" aria-label="Search" name="title">
+                <input class="form-control me-2" type="search" placeholder="Author" aria-label="Search" name="author">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
     </div>
-  </div>
 </nav>
 </body>
 </html>
