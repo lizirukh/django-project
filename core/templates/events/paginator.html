@@ -1,11 +1,11 @@
 <nav aria-label="...">
   <ul class="pagination">
-    {% if books.has_previous %}
+    {% if page_obj.has_previous %}
       <li class="page-item">
         <a class="page-link" href="?page=1">&laquo;</a>
       </li>
       <li class="page-item">
-        <a class="page-link" href="?page={{ books.previous_page_number }}">Previous</a>
+        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
       </li>
     {% else %}
         <li class="page-item disabled">
@@ -13,12 +13,12 @@
         </li>
     {% endif %}
 
-    {% for num in books.paginator.page_range %}
-        {% if books.number == num %}
+    {% for num in page_obj.paginator.page_range %}
+        {% if page_obj.number == num %}
              <li class="page-item active" aria-current="page">
-                 <a class="page-link" href="{{ books.num }}">{{ num }}</a>
+                 <a class="page-link" href="{{ page_obj.num }}">{{ num }}</a>
              </li>
-        {% elif num > books.number|add:-2 and num < books.number|add:2 %}
+        {% elif num > page_obj.number|add:-2 and num < page_obj.number|add:2 %}
             <li class="page-item"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
         {% endif %}
     {% endfor %}
@@ -29,12 +29,12 @@
 <!--    </li>-->
 <!--    <li class="page-item"><a class="page-link" href="#">3</a></li>-->
 
-    {% if books.has_next %}
+    {% if page_obj.has_next %}
       <li class="page-item">
-        <a class="page-link" href="?page={{ books.next_page_number }}">Next</a>
+        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
       </li>
       <li class="page-item">
-        <a class="page-link" href="?page={{ books.paginator.num_pages }}">&raquo;</a>
+        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">&raquo;</a>
       </li>
     {% else %}
         <li class="page-item disabled">

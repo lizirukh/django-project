@@ -24,10 +24,14 @@
         <a href="{% url 'core:books_list' %}" class="btn btn-info">Go Back</a>
 
         {% if user.is_authenticated and perms.core.delete_bookslist %}
-        <a href="{% url 'change_book' book.pk %}" class='btn btn-warning'>Edit</a>
-        <a href="{% url 'buy_book' book.pk %}" class='btn btn-primary'>Buy Book</a>
+        <a href="{% url 'core:change_book' book.id %}" class='btn btn-warning'>Edit</a>
+        <form action="{% url 'core:buy_book' book.id %}">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-primary">Buy Now</button>
+        </form>
 
-        <form action="{% url 'delete_book' book.pk %}" method="post">
+
+        <form action="{% url 'core:delete_book' book.pk %}" method="post">
             {% csrf_token %}
             <button class="btn btn-danger">Delete</button>
         </form>

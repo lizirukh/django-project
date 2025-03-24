@@ -6,11 +6,16 @@
 
 {% block content %}
 
-<form method="post">
+<form method="post" enctype="multipart/form-data">
 
     {% csrf_token %}
 
     {{ form|crispy }}
+
+    {{ image_formset.management_form }}
+    {% for form in image_formset %}
+        <p>{{ form.as_p }}</p>
+    {% endfor %}
 
      <button type="submit" class="btn btn-warning">Edit Book</button>
      <button onclick="history.back()" class="btn btn-danger">Cancel</button>

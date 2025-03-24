@@ -12,4 +12,4 @@ class BookImageForm(forms.ModelForm):
         model = BookImage
         fields = ('image',)
 
-BookImageFormSet =forms.modelformset_factory(BookImage, form=BookImageForm, extra=2)
+BookImageFormSet =forms.modelformset_factory(BookImage, form=BookImageForm, extra=2, can_delete=True)
