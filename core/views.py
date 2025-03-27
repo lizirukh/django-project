@@ -16,7 +16,8 @@ from django.views.generic import View, ListView, CreateView, DetailView, DeleteV
 from django.urls import reverse_lazy
 
 from django.forms import modelformset_factory
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from .mixins import BookAddMixin, BookEditMixin
 
 from django.views.generic.edit import UpdateView
 
@@ -27,6 +28,8 @@ class BooksListView(ListView):
     template_name = 'events/books_list.html'
     context_object_name = 'books'
     paginate_by = 8
+    # login_url = reverse_lazy('authentication:login')
+    # permission_required = ('core.view_books',)
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -124,7 +127,7 @@ class BooksListView(ListView):
 #     # else:
 #     #     return HttpResponse('You do not have permission to add books.')
 
-class CreateBookView(CreateView):
+class CreateBookView(BookAddMixin, CreateView):
     model = BooksList
     form_class = BooksForm
     template_name = 'events/add_book.html'
@@ -269,7 +272,7 @@ class BookDeleteView(LoginRequiredMixin, DeleteView):
 #         return render(request, 'events/update_books.html', {'form': form})
 #     # logger.info(f'Book - Title - {id} has been changed.')
 
-class BookUpdateView(UpdateView):
+class BookUpdateView(BookEditMixin, UpdateView):
     model = BooksList
     form_class = BooksForm
     template_name = 'events/update_books.html'
