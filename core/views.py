@@ -40,11 +40,11 @@ class BooksListView(ListView):
         filters = Q()
 
         if title and author:
-            filters &= Q(title__icontains=title) & (Q(author_id__first_name__icontains=author) | Q(author_id__last_name__icontains=author))
+            filters &= Q(title__icontains=title) & (Q(author__first_name__icontains=author) | Q(author__last_name__icontains=author))
         elif title:
             filters |= Q(title__icontains=title)
         elif author:
-            filters |= Q(author_id__first_name__icontains=author) | Q(author_id__last_name__icontains=author)
+            filters |= Q(author__first_name__icontains=author) | Q(author__last_name__icontains=author)
 
         if title or author:
             books = self.model.objects.filter(filters)
