@@ -21,8 +21,8 @@
         <h5 class="card-title">{{ book.title }}</h5>
         <p class="card-text">{{ book.description }}</p>
         <p class="card-text">{{ book.publishing_date }}</p>
-        <a href="{% url 'core:books_list' %}" class="btn btn-info">Go Back</a>
-
+        <a onclick="history.back()" class="btn btn-info"> Go Back </a>
+<!-- Previously used - {% url 'core:books_list' %}-->
         {% if user.is_authenticated and perms.core.delete_bookslist %}
         <a href="{% url 'core:change_book' book.id %}" class='btn btn-warning'>Edit</a>
         <form action="{% url 'core:buy_book' book.id %}">
